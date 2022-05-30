@@ -31,6 +31,7 @@ body {
 	margin: 0 auto;
 	padding: 0 $containerPadding + px;
 	max-width: $maxWidthContainer + px;
+	width: 100%;
 
 	@each $size, $value in $container-widths {
 		@media (max-width: map.get($breakpoints, $size)) {
