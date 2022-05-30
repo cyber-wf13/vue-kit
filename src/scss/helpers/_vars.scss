@@ -1,0 +1,36 @@
+// Переменные основных цветов
+$c-primary: #116acc;
+$c-border: #9ca3af;
+$c-font: #1f2937;
+
+// Параметры контейнера и блоков
+$containerPadding: 15;
+$maxWidth: 1440;
+$maxWidthContainerCount: 1200;
+$maxWidthContainer: $maxWidthContainerCount + ($containerPadding * 2);
+
+// Параметры основного семейства шрифта
+$base-font: "Times-New-Roman", sans-serif;
+$base-font-weight: 500;
+$base-font-size: rem(16);
+$base-font-color: $c-font;
+
+// Карта базовых брейкпоинтов
+$breakpoints: (
+  "xxl": 1400px,
+  "xl": 1200px,
+  "lg": 992px,
+  "md": 768px,
+  "sm": 576px,
+  "xs": 320px,
+);
+
+// Карта для определения максимальной ширины контейнера на брейкпоинте
+$container-widths: (
+  "xxl": $maxWidthContainer + px,
+  "xl": 1140px,
+  "lg": 960px,
+  "md": 720px,
+  "sm": 540px,
+  "xs": 100%,
+);
