@@ -48,12 +48,24 @@
           </radio-check>
         </div>
       </div>
+
+      <div class="basic__block basic-block">
+        <h4 class="basic-block__title">Sliders</h4>
+        <div class="basic-block__body">
+          <slider-single
+            min-value="300"
+            max-value="400"
+            @change="sliderMove"
+          ></slider-single>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
 import RadioCheck from "@/components/RadioCheck.vue";
+import SliderSingle from "@/components/SliderSingle.vue";
 
 export default {
   name: "App",
@@ -103,10 +115,14 @@ export default {
   },
   components: {
     RadioCheck,
+    SliderSingle,
   },
   methods: {
     radioCheckHandle(e) {
       console.log("From component", e.target.value);
+    },
+    sliderMove(value) {
+      console.log("Value is from PARENT", value);
     },
   },
 };
