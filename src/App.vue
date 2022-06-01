@@ -57,6 +57,11 @@
             max-value="400"
             @change="sliderMove"
           ></slider-single>
+          <slider-double
+            min-value="300"
+            max-value="400"
+            @change="sliderMove"
+          ></slider-double>
         </div>
       </div>
     </div>
@@ -66,6 +71,7 @@
 <script>
 import RadioCheck from "@/components/RadioCheck.vue";
 import SliderSingle from "@/components/SliderSingle.vue";
+import SliderDouble from "@/components/SliderDouble.vue";
 
 export default {
   name: "App",
@@ -116,6 +122,7 @@ export default {
   components: {
     RadioCheck,
     SliderSingle,
+    SliderDouble,
   },
   methods: {
     radioCheckHandle(e) {
