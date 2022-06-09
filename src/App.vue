@@ -62,12 +62,25 @@
       </div>
     </div>
   </section>
+
+  <section class="basic">
+    <h2 class="basic__title title">Components</h2>
+    <div class="basic__content">
+      <div class="basic__block basic-block">
+        <h4 class="basic-block__title">Datetimepicker</h4>
+        <div class="basic-block__body">
+          <datetimepicker />
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
 import RadioCheck from "@/components/RadioCheck.vue";
 import SliderSingle from "@/components/SliderSingle.vue";
 import SliderDouble from "@/components/SliderDouble.vue";
+import Datetimepicker from "@/components/DatetimepickerCalendar.vue";
 
 export default {
   name: "App",
@@ -119,6 +132,7 @@ export default {
     RadioCheck,
     SliderSingle,
     SliderDouble,
+    Datetimepicker,
   },
   methods: {
     radioCheckHandle(e) {
@@ -133,6 +147,12 @@ export default {
 
 <style lang="scss">
 @import "@/scss/style";
+
+#app {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
 
 .title {
   font-size: rem(21);
