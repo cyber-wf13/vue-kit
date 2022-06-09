@@ -52,14 +52,10 @@
       <div class="basic__block basic-block">
         <h4 class="basic-block__title">Sliders</h4>
         <div class="basic-block__body">
-          <slider-single
-            min-value="300"
-            max-value="400"
-            @change="sliderMove"
-          ></slider-single>
+          <slider-single min-value="300" max-value="400"></slider-single>
           <slider-double
-            min-value="300"
-            max-value="400"
+            min-value="550"
+            max-value="600"
             @change="sliderMove"
           ></slider-double>
         </div>
