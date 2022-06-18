@@ -17,12 +17,16 @@
           </button>
         </div>
         <div class="calendar-actions__dates">
-          <span class="calendar-actions__year calendar-actions__date">{{
-            selectedYear
-          }}</span>
-          <span class="calendar-actions__month calendar-actions__date">{{
-            nameOfMonth[selectedMonth]
-          }}</span>
+          <custom-select
+            :list-items="selectListOfMonth"
+            :selected="nameOfMonth[selectedMonth]"
+            @select="selectMonth"
+          ></custom-select>
+          <custom-select
+            :list-items="selectListOfYear"
+            :selected="selectedYear"
+            @select="selectYear"
+          ></custom-select>
         </div>
         <div class="calendar-actions__items calendar-actions__next">
           <button
@@ -67,6 +71,8 @@
   </div>
 </template>
 <script>
+import CustomSelect from "@/components/CustomSelect.vue";
+
 export default {
   data() {
     return {
@@ -79,6 +85,57 @@ export default {
         next: 0,
         current: 0,
       },
+      selectedListItem: "jan",
+      selectListOfMonth: [
+        {
+          text: "jan",
+          value: "0",
+        },
+        {
+          text: "feb",
+          value: "1",
+        },
+        {
+          text: "mar",
+          value: "2",
+        },
+        {
+          text: "apr",
+          value: "3",
+        },
+        {
+          text: "may",
+          value: "4",
+        },
+        {
+          text: "jun",
+          value: "5",
+        },
+        {
+          text: "jul",
+          value: "6",
+        },
+        {
+          text: "aug",
+          value: "7",
+        },
+        {
+          text: "sep",
+          value: "8",
+        },
+        {
+          text: "oct",
+          value: "9",
+        },
+        {
+          text: "nov",
+          value: "10",
+        },
+        {
+          text: "dec",
+          value: "11",
+        },
+      ],
       nameOfMonth: [
         "jan",
         "feb",
@@ -87,14 +144,15 @@ export default {
         "may",
         "jun",
         "jul",
-        "aug",
         "sep",
+        "aug",
         "oct",
         "nov",
         "dec",
       ],
     };
   },
+  components: { CustomSelect },
   mounted() {
     this.days = this.calculateDays();
   },
@@ -189,7 +247,7 @@ export default {
       }
       this.selectedMonth -= 1;
       this.days = this.calculateDays();
-      console.log("Month is update");
+      // console.log("Month is update");
     },
     monthNextUpdate() {
       if (this.selectedMonth >= 11) {
@@ -197,7 +255,7 @@ export default {
       }
       this.selectedMonth += 1;
       this.days = this.calculateDays();
-      console.log("Month is update");
+      // console.log("Month is update");
     },
     yearPrevUpdate() {
       if (this.selectedYear <= 1922) {
@@ -205,7 +263,7 @@ export default {
       }
       this.selectedYear -= 1;
       this.days = this.calculateDays();
-      console.log("Year is update");
+      // console.log("Year is update");
     },
     yearNextUpdate() {
       if (this.selectedYear >= 2122) {
@@ -213,13 +271,31 @@ export default {
       }
       this.selectedYear += 1;
       this.days = this.calculateDays();
-      console.log("Year is update");
+      // console.log("Year is update");
+    },
+    selectMonth(month) {
+      this.selectedMonth = month;
+      this.days = this.calculateDays();
+    },
+    selectYear(year) {
+      this.selectedYear = year;
+      this.days = this.calculateDays();
     },
   },
   computed: {
     daysCount() {
       const countOfFebruary = this.selectedYear % 4 === 0 ? 29 : 28;
       return [31, countOfFebruary, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    },
+    selectListOfYear() {
+      const rangeOfYear = [];
+      for (let year = 1922; year <= 2122; year++) {
+        rangeOfYear.push({
+          text: year,
+          value: year,
+        });
+      }
+      return rangeOfYear;
     },
   },
 };
@@ -327,6 +403,8 @@ export default {
   }
 
   &__dates {
+    display: flex;
+    justify-content: space-between;
     font-weight: 300;
     font-size: rem(14);
   }

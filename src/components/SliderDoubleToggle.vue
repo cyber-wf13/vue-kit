@@ -53,7 +53,7 @@ export default {
           : toggleX < this.toggleX;
 
       if (toggleDiff) {
-        this.toggleUp();
+        // this.toggleUp();
         return;
       }
 
@@ -91,13 +91,7 @@ export default {
   box-shadow: 0 1px 13px 0 rgba(#000, 0.2);
   cursor: pointer;
   outline: none;
-  z-index: 10;
   transition: transform 0.3s ease;
-
-  &--pressed {
-    transform: scale3d(1.5, 1.5, 1);
-    z-index: 50;
-  }
 
   &--left {
     left: 0;
@@ -107,6 +101,11 @@ export default {
   &--right {
     left: 100%;
     z-index: 30;
+  }
+
+  &--pressed {
+    transform: scale3d(1.5, 1.5, 1);
+    z-index: 50;
   }
 }
 </style>
