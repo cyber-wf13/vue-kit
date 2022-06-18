@@ -80,7 +80,7 @@
 import RadioCheck from "@/components/RadioCheck.vue";
 import SliderSingle from "@/components/SliderSingle.vue";
 import SliderDouble from "@/components/SliderDouble.vue";
-import Datetimepicker from "@/components/DatetimepickerCalendar.vue";
+import Datetimepicker from "@/components/Datetimepicker.vue";
 
 export default {
   name: "App",

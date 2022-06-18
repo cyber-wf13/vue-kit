@@ -56,11 +56,14 @@
     <div class="calendar__body">
       <div
         class="calendar__ceil"
+        @click="clickToDayCeil"
         v-for="(day, idx) in days"
         :key="idx"
         :class="{
           'calendar__ceil-under':
             idx < daysIdx.prev || idx >= daysIdx.next ? true : false,
+          'calendar__ceil-prev': idx < daysIdx.prev ? true : false,
+          'calendar__ceil-next': idx >= daysIdx.next ? true : false,
           'calendar__ceil-current':
             idx === daysIdx.current && daysIdx.current != -1 ? true : false,
         }"
@@ -74,6 +77,7 @@
 import CustomSelect from "@/components/CustomSelect.vue";
 
 export default {
+  props: ["dateSelect"],
   data() {
     return {
       nameOfDays: ["пн", "вт", "ср", "чт", "пт", "сб", "нд"],
@@ -281,6 +285,34 @@ export default {
       this.selectedYear = year;
       this.days = this.calculateDays();
     },
+    clickToDayCeil(e) {
+      const ceil = e.currentTarget;
+      let selectDay = ceil.textContent;
+      let selectMonth = 1 + this.selectedMonth;
+      let selectYear = this.selectedYear;
+
+      if (ceil.classList.contains("calendar__ceil-prev")) {
+        selectMonth -= 1;
+      } else if (ceil.classList.contains("calendar__ceil-next")) {
+        selectMonth += 1;
+      }
+
+      if (selectDay.length === 1) {
+        selectDay = `0${selectDay}`;
+      }
+
+      if (selectMonth.toString().length === 1) {
+        selectMonth = `0${selectMonth}`;
+      }
+
+      const selectedDateParams = {
+        day: selectDay,
+        month: selectMonth,
+        year: selectYear,
+      };
+
+      this.$emit("calendarSelect", selectedDateParams);
+    },
   },
   computed: {
     daysCount() {
@@ -296,6 +328,13 @@ export default {
         });
       }
       return rangeOfYear;
+    },
+  },
+  watch: {
+    dateSelect() {
+      this.selectedYear = this.dateSelect.year;
+      this.selectedMonth = this.dateSelect.month;
+      this.calculateDays();
     },
   },
 };

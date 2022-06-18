@@ -34,7 +34,8 @@ export default {
   mounted() {
     window.addEventListener("click", (e) => {
       const target = e.target;
-      if (!this.$el.contains(target)) {
+      if (!this.$el.contains(target) && this.isOpen === true) {
+        console.log("close", this.$el);
         this.isOpen = false;
       }
     });
