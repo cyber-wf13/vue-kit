@@ -17,15 +17,16 @@ export default {
   data() {
     return {
       inputDate: "",
+      fromCalendar: false,
     };
   },
   methods: {
     parseDate(date) {
       const dateParts = date.split("/");
       const dateParams = {
-        day: dateParts[0],
-        month: dateParts[1] - 1,
-        year: dateParts[2],
+        day: Number(dateParts[0]),
+        month: Number(dateParts[1]),
+        year: Number(dateParts[2]),
       };
 
       return dateParams;
@@ -33,6 +34,10 @@ export default {
   },
   watch: {
     inputDate(newValue, oldValue) {
+      if (this.fromCalendar) {
+        this.fromCalendar = false;
+        return;
+      }
       const inputLength = this.inputDate.length;
 
       // Перевірка, якщо день менше за календарний 1-31
@@ -81,9 +86,21 @@ export default {
         this.$emit("selectDate", resultDate);
       }
     },
-    dateSelect(newDate) {
-      this.inputDate = `${newDate.day}/${newDate.month}/${newDate.year}`;
-      console.log("Calendar date", newDate);
+    dateSelect(newDate, oldDate) {
+      let day = newDate.day.toString();
+      let month = newDate.month.toString();
+      let year = newDate.year;
+      // console.log("Update field", newDate, oldDate);
+      if (day.length === 1) {
+        day = `0${day}`;
+      }
+
+      if (month.length === 1) {
+        month = `0${month}`;
+      }
+      this.fromCalendar = true;
+      this.inputDate = `${day}/${month}/${year}`;
+      // console.log("Calendar date", newDate);
     },
   },
 };

@@ -80,9 +80,15 @@ export default {
   props: ["dateSelect"],
   data() {
     return {
+      fromCalendar: false,
       nameOfDays: ["пн", "вт", "ср", "чт", "пт", "сб", "нд"],
       selectedMonth: new Date().getMonth(),
       selectedYear: new Date().getFullYear(),
+      selectedDateParams: {
+        day: new Date().getDate(),
+        month: new Date().getMonth(),
+        year: new Date().getFullYear(),
+      },
       days: [],
       daysIdx: {
         prev: 0,
@@ -148,8 +154,8 @@ export default {
         "may",
         "jun",
         "jul",
-        "sep",
         "aug",
+        "sep",
         "oct",
         "nov",
         "dec",
@@ -251,6 +257,8 @@ export default {
       }
       this.selectedMonth -= 1;
       this.days = this.calculateDays();
+      this.monthDateUpdate();
+
       // console.log("Month is update");
     },
     monthNextUpdate() {
@@ -259,36 +267,53 @@ export default {
       }
       this.selectedMonth += 1;
       this.days = this.calculateDays();
+      this.monthDateUpdate();
       // console.log("Month is update");
+    },
+    monthDateUpdate() {
+      this.selectedDateParams = Object.assign({}, this.selectedDateParams, {
+        month: this.selectedMonth + 1,
+      });
+      this.emitSelectDate();
     },
     yearPrevUpdate() {
       if (this.selectedYear <= 1922) {
         return;
       }
-      this.selectedYear -= 1;
+      this.selectedYear = Number(this.selectedYear) - 1;
       this.days = this.calculateDays();
+      this.yearDateUpdate();
       // console.log("Year is update");
     },
     yearNextUpdate() {
       if (this.selectedYear >= 2122) {
         return;
       }
-      this.selectedYear += 1;
+      this.selectedYear = Number(this.selectedYear) + 1;
       this.days = this.calculateDays();
+      this.yearDateUpdate();
       // console.log("Year is update");
+    },
+    yearDateUpdate() {
+      this.selectedDateParams = Object.assign({}, this.selectedDateParams, {
+        year: this.selectedYear,
+      });
+      this.emitSelectDate();
     },
     selectMonth(month) {
       this.selectedMonth = month;
       this.days = this.calculateDays();
+      this.monthDateUpdate();
     },
     selectYear(year) {
       this.selectedYear = year;
       this.days = this.calculateDays();
+      this.yearDateUpdate();
     },
     clickToDayCeil(e) {
       const ceil = e.currentTarget;
       let selectDay = ceil.textContent;
-      let selectMonth = 1 + this.selectedMonth;
+      let selectMonth = this.selectedMonth + 1;
       let selectYear = this.selectedYear;
 
       if (ceil.classList.contains("calendar__ceil-prev")) {
@@ -297,21 +322,17 @@ export default {
         selectMonth += 1;
       }
 
-      if (selectDay.length === 1) {
-        selectDay = `0${selectDay}`;
-      }
-
-      if (selectMonth.toString().length === 1) {
-        selectMonth = `0${selectMonth}`;
-      }
-
-      const selectedDateParams = {
-        day: selectDay,
-        month: selectMonth,
-        year: selectYear,
+      this.selectedDateParams = {
+        day: Number(selectDay),
+        month: Number(selectMonth),
+        year: Number(selectYear),
       };
 
-      this.$emit("calendarSelect", selectedDateParams);
+      this.emitSelectDate();
+    },
+    emitSelectDate() {
+      this.$emit("calendarSelect", this.selectedDateParams);
+      this.fromCalendar = true;
     },
   },
   computed: {
@@ -332,9 +353,16 @@ export default {
   },
   watch: {
     dateSelect() {
-      this.selectedYear = this.dateSelect.year;
-      this.selectedMonth = this.dateSelect.month;
-      this.calculateDays();
+      if (this.fromCalendar === true) {
+        this.fromCalendar = false;
+        return;
+      }
+      let year = this.dateSelect.year;
+      let month = this.dateSelect.month - 1;
+      console.log("Update");
+      this.selectedYear = year;
+      this.selectedMonth = month;
+      this.days = this.calculateDays();
     },
   },
 };

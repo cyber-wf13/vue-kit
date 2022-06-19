@@ -2,14 +2,14 @@
   <div class="datetimepicker">
     <field
       @focus="isOpen = true"
-      @selectDate="handleField"
-      :date-select="selectCalendarDate"
+      @selectDate="handleSelectDate"
+      :dateSelect="selectedDate"
     ></field>
     <transition name="slide-fade">
       <calendar
         v-show="isOpen"
-        :date-select="selectedInputDate"
-        @calendarSelect="handleCalendarSelect"
+        @calendarSelect="handleSelectDate"
+        :dateSelect="selectedDate"
       ></calendar
     ></transition>
   </div>
@@ -30,8 +30,7 @@ export default {
   data() {
     return {
       isOpen: false,
-      selectedInputDate: {},
-      selectCalendarDate: {},
+      selectedDate: {},
     };
   },
   components: {
@@ -39,11 +38,9 @@ export default {
     Field,
   },
   methods: {
-    handleField(date) {
-      this.selectedInputDate = date;
-    },
-    handleCalendarSelect(date) {
-      this.selectCalendarDate = date;
+    handleSelectDate(date) {
+      console.log("Date selected", date);
+      this.selectedDate = date;
     },
   },
 };
