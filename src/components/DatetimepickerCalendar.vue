@@ -20,11 +20,13 @@
           <custom-select
             :list-items="selectListOfMonth"
             :selected="nameOfMonth[selectedMonth]"
+            :focus-value="selectedMonth"
             @select="selectMonth"
           ></custom-select>
           <custom-select
             :list-items="selectListOfYear"
             :selected="selectedYear"
+            :focus-value="selectedYear"
             @select="selectYear"
           ></custom-select>
         </div>

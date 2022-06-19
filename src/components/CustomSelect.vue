@@ -1,30 +1,31 @@
 <template>
   <div class="custom-select">
-    <div class="custom-select__head" @click="isOpen = !isOpen">
+    <div class="custom-select__head" @click="toggleList">
       <span class="custom-select__head-text">{{ selectText }}</span
       ><i
         class="custom-select__head-arrow fa-solid fa-chevron-down"
         :class="{ 'custom-select__head-arrow--active': isOpen }"
       ></i>
     </div>
-    <transition name="slide-fade">
-      <ul class="custom-select__list" v-show="isOpen">
-        <li
-          class="custom-select__list-item"
-          v-for="item in listItems"
-          :key="item.value"
-          :value="item.value"
-          @click="listItemSelect"
-        >
-          {{ item.text }}
-        </li>
-      </ul>
-    </transition>
+    <ul
+      class="custom-select__list"
+      :class="{ 'custom-select__list--open': isOpen }"
+    >
+      <li
+        class="custom-select__list-item"
+        v-for="item in listItems"
+        :key="item.value"
+        :value="item.value"
+        @click="listItemSelect"
+      >
+        {{ item.text }}
+      </li>
+    </ul>
   </div>
 </template>
 <script>
 export default {
-  props: ["listItems", "selected"],
+  props: ["listItems", "selected", "focusValue"],
   data() {
     return {
       isOpen: false,
@@ -39,7 +40,12 @@ export default {
         this.isOpen = false;
       }
     });
+
+    if (this.itemForFocus) {
+      this.itemForFocus.setAttribute("tabindex", "-1");
+    }
   },
+
   methods: {
     listItemSelect(e) {
       const selectOption = e.currentTarget;
@@ -49,6 +55,20 @@ export default {
       this.selectText = selectedText;
       this.isOpen = false;
       this.$emit("select", selectedValue);
+    },
+    setFocusToItem() {
+      if (this.itemForFocus) {
+        this.itemForFocus.focus();
+      }
+    },
+    toggleList() {
+      this.isOpen = !this.isOpen;
+      this.setFocusToItem();
+    },
+  },
+  computed: {
+    itemForFocus() {
+      return document.querySelector(`[value='${this.focusValue}']`) || false;
     },
   },
   watch: {
@@ -95,10 +115,19 @@ export default {
     border: 1px solid #d1d5db;
     border-radius: 7px;
     background-color: #fff;
-    z-index: 100;
+    z-index: -1;
     height: 9em;
     overflow-x: hidden;
     overflow-y: auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease-out;
+
+    &--open {
+      z-index: 100;
+      opacity: 1;
+      transform: translateY(0px);
+    }
   }
 
   &__list-item {
@@ -112,19 +141,5 @@ export default {
       background-color: rgba(179, 206, 226, 0.2);
     }
   }
-}
-
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateY(-20px);
-  opacity: 0;
 }
 </style>
