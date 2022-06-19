@@ -373,9 +373,12 @@ export default {
 .calendar {
   max-width: 300px;
   width: 100%;
-  background-color: $c-primary;
-  border-radius: 3px;
-  padding: 5px;
+  background-color: $c-dark;
+  border-radius: 12px;
+  padding: 16px 32px;
+  box-shadow: 0px 30px 84px rgba(19, 10, 46, 0.08),
+    0px 8px 32px rgba(19, 10, 46, 0.07), 0px 3px 14px rgba(19, 10, 46, 0.03),
+    0px 1px 3px rgba(19, 10, 46, 0.13);
 
   &__body,
   &__days {
@@ -388,7 +391,7 @@ export default {
     flex: 1 0 14.28%;
     text-align: center;
     height: 30px;
-    color: #fff;
+    color: $c-white;
     font-size: rem(14);
     font-weight: 300;
     line-height: 1em;
@@ -418,7 +421,7 @@ export default {
   }
 
   &__ceil-under {
-    color: rgba(#fff, 0.5);
+    color: rgba(#d1d5db, 0.4);
   }
 
   &__ceil-current {
