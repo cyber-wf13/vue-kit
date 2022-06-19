@@ -48,6 +48,18 @@
           </radio-check>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="basic">
+    <h2 class="basic__title title">Components</h2>
+    <div class="basic__content">
+      <div class="basic__block basic-block">
+        <h4 class="basic-block__title">Datetimepicker</h4>
+        <div class="basic-block__body">
+          <datetimepicker />
+        </div>
+      </div>
 
       <div class="basic__block basic-block">
         <h4 class="basic-block__title">Sliders</h4>
@@ -64,12 +76,24 @@
   </section>
 
   <section class="basic">
-    <h2 class="basic__title title">Components</h2>
+    <h2 class="basic__title title">Text input</h2>
     <div class="basic__content">
       <div class="basic__block basic-block">
-        <h4 class="basic-block__title">Datetimepicker</h4>
+        <h4 class="basic-block__title">Default</h4>
         <div class="basic-block__body">
-          <datetimepicker />
+          <text-input />
+        </div>
+      </div>
+      <div class="basic__block basic-block">
+        <h4 class="basic-block__title">Status input</h4>
+        <div class="basic-block__body">
+          <text-input :withStatus="true" />
+        </div>
+      </div>
+      <div class="basic__block basic-block">
+        <h4 class="basic-block__title">Check / Delete</h4>
+        <div class="basic-block__body">
+          <check-input />
         </div>
       </div>
     </div>
@@ -81,6 +105,8 @@ import RadioCheck from "@/components/RadioCheck.vue";
 import SliderSingle from "@/components/SliderSingle.vue";
 import SliderDouble from "@/components/SliderDouble.vue";
 import Datetimepicker from "@/components/Datetimepicker.vue";
+import TextInput from "@/components/TextInput.vue";
+import CheckInput from "@/components/CheckInput.vue";
 
 export default {
   name: "App",
@@ -133,6 +159,8 @@ export default {
     SliderSingle,
     SliderDouble,
     Datetimepicker,
+    TextInput,
+    CheckInput,
   },
   methods: {
     radioCheckHandle(e) {
