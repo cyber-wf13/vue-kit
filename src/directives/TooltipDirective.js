@@ -6,7 +6,7 @@ export const TooltipDirective = {
     tooltip.setAttribute("data-object-tooltip", "");
 
     if (binding.arg) {
-      tooltip.style.backgroundColor = binding.arg;
+      tooltip.style = `--tooltip-color: ${binding.arg};`;
     }
 
     el.appendChild(tooltip);

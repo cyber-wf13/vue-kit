@@ -32,7 +32,7 @@ export default {
       document.removeEventListener("mousemove", this.mouseMove);
     },
     toggleLeave() {
-      this.toggleUp();
+      // this.toggleUp();
     },
     mouseMove(e) {
       let moveX = e.x - this.sliderX - 7.5;
@@ -46,8 +46,8 @@ export default {
       this.calculateTogglePos(moveX);
     },
     calculateTogglePos(moveX) {
-      let toggleX = moveX;
-      let toggleDiff =
+      const toggleX = moveX;
+      const toggleDiff =
         this.position === "left"
           ? toggleX > this.toggleX
           : toggleX < this.toggleX;
@@ -73,8 +73,8 @@ export default {
     toggleClass() {
       return {
         "slider-toggle--pressed": this.isPressed,
-        "slider-toggle--left": this.position === "left" ? true : false,
-        "slider-toggle--right": this.position === "right" ? true : false,
+        "slider-toggle--left": this.position === "left",
+        "slider-toggle--right": this.position === "right",
       };
     },
   },

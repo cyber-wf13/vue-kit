@@ -148,7 +148,7 @@
               basic-block__item-tooltip basic-block__item-tooltip--warning
               fa-solid fa-triangle-exclamation
             "
-            v-tooltip:#ba0000="'Tooltip content here'"
+            v-tooltip:[color]="'Tooltip content here'"
           ></i>
         </div>
       </div>
@@ -170,6 +170,7 @@ export default {
   name: "App",
   data() {
     return {
+      color: "#bb0000",
       checkboxes: [
         {
           id: 0,
@@ -258,9 +259,14 @@ export default {
 @import "@/scss/style";
 
 #app {
+  position: relative;
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+  background: #f3f4f6;
+  border-radius: 56px;
+  padding: 50px 55px 105px 55px;
+  margin: 50px 0;
 }
 
 .title {
@@ -272,7 +278,9 @@ export default {
 .basic {
   &__content {
     display: flex;
+    flex-wrap: wrap;
     margin: 10px 0;
+    gap: 20px 10px;
   }
 }
 

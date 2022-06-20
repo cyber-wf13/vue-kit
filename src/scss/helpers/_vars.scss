@@ -14,7 +14,7 @@ $maxWidthContainerCount: 1200;
 $maxWidthContainer: $maxWidthContainerCount + ($containerPadding * 2);
 
 // Параметры основного семейства шрифта
-$base-font: "Times-New-Roman", sans-serif;
+$base-font: "Ubuntu", "Arial", sans-serif;
 $base-font-weight: 500;
 $base-font-size: rem(16);
 $base-font-color: $c-font;

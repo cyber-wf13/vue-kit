@@ -13,7 +13,6 @@
       ref="toggle"
       @mousedown="toggleDown"
       @mouseup="toggleUp"
-      v-tooltip="currentValue"
     ></button>
   </div>
 </template>
@@ -130,7 +129,7 @@ export default {
     transition: transform 0.3s ease;
 
     &--pressed {
-      transform: scale3d(1.5, 1.5, 1);
+      transform: scale(1.5);
     }
   }
 }
