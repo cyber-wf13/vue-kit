@@ -1,22 +1,19 @@
 <template>
   <div class="custom-select">
     <div class="custom-select__head" @click="toggleList" tabindex="-1">
-      <span
-        class="custom-select__head-text"
-        :class="{ 'custom-select__head-text--selected': isSelected }"
-        >{{ selectText }}</span
+      <span class="custom-select__head-text">{{ selectText }}</span
       ><i
         class="custom-select__head-arrow fa-solid fa-chevron-down"
         :class="{ 'custom-select__head-arrow--active': isOpen }"
       ></i>
     </div>
     <ul
-      class="custom-select__list"
+      class="custom-select__list list-multi"
       :class="{ 'custom-select__list--open': isOpen }"
       v-show="isOpen"
     >
       <li
-        class="custom-select__list-item"
+        class="custom-select__list-item list-multi__item"
         v-for="item in listItems"
         :key="item.value"
         :value="item.value"
@@ -34,7 +31,7 @@ export default {
     return {
       isOpen: false,
       selectText: this.selected,
-      isSelected: false,
+      checkedItems: [],
     };
   },
   mounted() {
@@ -53,13 +50,18 @@ export default {
   methods: {
     listItemSelect(e) {
       const selectOption = e.currentTarget;
-      const selectedText = selectOption.textContent;
       const selectedValue = selectOption.value;
+      const idxItem = this.checkedItems.indexOf(selectedValue);
 
-      this.selectText = selectedText;
-      this.isOpen = false;
-      this.isSelected = true;
-      this.$emit("select", selectedValue);
+      // this.selectText = selectedText;
+      // this.isOpen = false;
+      if (idxItem === -1) {
+        this.checkedItems.push(selectedValue);
+        selectOption.classList.add("list-multi__item--checked");
+      } else {
+        this.checkedItems.splice(idxItem, 1);
+        selectOption.classList.remove("list-multi__item--checked");
+      }
     },
     setFocusToItem() {
       if (this.itemForFocus) {
@@ -79,6 +81,11 @@ export default {
   watch: {
     selected(newValue) {
       this.selectText = newValue;
+    },
+    isOpen(open) {
+      if (open === false) {
+        this.$emit("select", this.checkedItems);
+      }
     },
   },
 };
@@ -112,10 +119,6 @@ export default {
   &__head-text {
     display: inline-block;
     margin-right: 8px;
-    color: $c-border;
-  }
-
-  &__head-text--selected {
     color: $c-font;
   }
 
@@ -164,6 +167,35 @@ export default {
     &:hover {
       background-color: rgba(179, 206, 226, 0.2);
     }
+  }
+}
+
+.list-multi {
+  &__item {
+    position: relative;
+    padding: 12px 16px 12px 40px;
+  }
+
+  &__item::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    height: 14px;
+    width: 14px;
+    border: 2px solid $c-dark;
+    border-radius: 2px;
+    background-color: $c-white;
+    text-align: center;
+    color: transparent;
+    transition: all 0.2s ease-in;
+  }
+
+  &__item--checked::before {
+    border: 2px solid $c-primary;
+    background-color: $c-primary;
+    color: $c-white;
   }
 }
 </style>

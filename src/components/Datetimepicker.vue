@@ -47,6 +47,7 @@ export default {
 </script>
 <style lang="scss">
 .datetimepicker {
+  position: relative;
   width: 300px;
 }
 .slide-fade-enter-active {

@@ -18,12 +18,14 @@
         </div>
         <div class="calendar-actions__dates">
           <custom-select
+            class="calendar-select"
             :list-items="selectListOfMonth"
             :selected="nameOfMonth[selectedMonth]"
             :focus-value="selectedMonth"
             @select="selectMonth"
           ></custom-select>
           <custom-select
+            class="calendar-select"
             :list-items="selectListOfYear"
             :selected="selectedYear"
             :focus-value="selectedYear"
@@ -371,6 +373,9 @@ export default {
 </script>
 <style lang="scss">
 .calendar {
+  position: absolute;
+  z-index: 100;
+  top: 100%;
   max-width: 300px;
   width: 100%;
   background-color: $c-dark;
@@ -489,6 +494,28 @@ export default {
 
     &:hover {
       transform: scale(1.1);
+    }
+  }
+}
+
+.calendar-select {
+  font-size: rem(14);
+  .custom-select {
+    &__head {
+      padding: 8px;
+      color: $c-white;
+      background-color: transparent;
+      border: none;
+    }
+
+    &__head-text,
+    &__head-arrow {
+      color: $c-white;
+    }
+
+    &__list {
+      width: auto;
+      box-shadow: none;
     }
   }
 }

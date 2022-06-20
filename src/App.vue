@@ -98,6 +98,35 @@
       </div>
     </div>
   </section>
+
+  <section class="basic">
+    <h2 class="basic__title title">Dropdown</h2>
+    <div class="basic__content">
+      <div class="basic__block basic-block">
+        <h4 class="basic-block__title">Default</h4>
+        <div class="basic-block__body">
+          <custom-select
+            class="basic-select"
+            :list-items="selectList"
+            selected="Default title"
+            :focus-value="1"
+          />
+        </div>
+      </div>
+      <div class="basic__block basic-block">
+        <h4 class="basic-block__title">Multiselect</h4>
+        <div class="basic-block__body">
+          <custom-select-multi
+            class="basic-select"
+            :list-items="selectList"
+            selected="Default title"
+            :focus-value="1"
+            @select="handleSelect"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -107,6 +136,8 @@ import SliderDouble from "@/components/SliderDouble.vue";
 import Datetimepicker from "@/components/Datetimepicker.vue";
 import TextInput from "@/components/TextInput.vue";
 import CheckInput from "@/components/CheckInput.vue";
+import CustomSelect from "@/components/CustomSelect.vue";
+import CustomSelectMulti from "@/components/CustomSelectMulti.vue";
 
 export default {
   name: "App",
@@ -152,6 +183,24 @@ export default {
           value: "Radio-3",
         },
       ],
+      selectList: [
+        {
+          text: "Option 1",
+          value: "1",
+        },
+        {
+          text: "Option 2",
+          value: "2",
+        },
+        {
+          text: "Option 3",
+          value: "3",
+        },
+        {
+          text: "Option 4",
+          value: "4",
+        },
+      ],
     };
   },
   components: {
@@ -161,6 +210,8 @@ export default {
     Datetimepicker,
     TextInput,
     CheckInput,
+    CustomSelect,
+    CustomSelectMulti,
   },
   methods: {
     radioCheckHandle(e) {
@@ -168,6 +219,9 @@ export default {
     },
     sliderMove(value) {
       console.log("Value is from PARENT", value);
+    },
+    handleSelect(selected) {
+      console.log("Selected items", selected);
     },
   },
 };
