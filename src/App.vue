@@ -127,6 +127,33 @@
       </div>
     </div>
   </section>
+
+  <section class="basic">
+    <h2 class="basic__title title">Tooltip</h2>
+    <div class="basic__content">
+      <div class="basic__block basic-block">
+        <h4 class="basic-block__title">Default</h4>
+        <div class="basic-block__body">
+          <i
+            class="basic-block__item-tooltip fa-solid fa-circle-exclamation"
+            v-tooltip="'Tooltip content here'"
+          ></i>
+        </div>
+      </div>
+      <div class="basic__block basic-block">
+        <h4 class="basic-block__title">Warning</h4>
+        <div class="basic-block__body">
+          <i
+            class="
+              basic-block__item-tooltip basic-block__item-tooltip--warning
+              fa-solid fa-triangle-exclamation
+            "
+            v-tooltip:#ba0000="'Tooltip content here'"
+          ></i>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -262,6 +289,18 @@ export default {
     flex-direction: column;
     gap: 10px;
     padding: 5px 0;
+  }
+
+  &__item-tooltip {
+    height: 24px;
+    width: 24px;
+    color: $c-dark;
+    font-size: rem(24);
+    cursor: pointer;
+  }
+
+  &__item-tooltip--warning {
+    color: $c-warning;
   }
 }
 </style>

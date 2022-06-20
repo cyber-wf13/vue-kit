@@ -13,6 +13,7 @@
       ref="toggle"
       @mousedown="toggleDown"
       @mouseup="toggleUp"
+      v-tooltip="currentValue"
     ></button>
   </div>
 </template>
@@ -28,8 +29,6 @@ export default {
   },
   methods: {
     toggleDown() {
-      console.log("Is pressed");
-
       this.isPressed = true;
       document.addEventListener("mousemove", this.mouseMove);
     },
@@ -37,7 +36,6 @@ export default {
       if (this.isPressed === false) {
         return;
       }
-      console.log("Is down");
 
       this.isPressed = false;
       document.removeEventListener("mousemove", this.mouseMove);
@@ -74,7 +72,6 @@ export default {
       this.$refs.underline.setAttribute("style", `width: ${togglePosX}px;`);
 
       this.percent = Math.round((togglePosX / sliderWidth) * 100);
-      console.log("Is moveing");
     },
     calculateValue() {
       const diffMinMaxValue = this.maxValue - this.minValue;
