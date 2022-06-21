@@ -1,7 +1,7 @@
 <template>
   <section class="basic">
     <h2 class="basic__title title">Inputs</h2>
-    <div class="basic__content">
+    <div class="basic__content radiocheck-content">
       <div class="basic__block basic-block">
         <h4 class="basic-block__title">Checkboxes</h4>
         <div class="basic-block__body">
@@ -64,8 +64,13 @@
       <div class="basic__block basic-block">
         <h4 class="basic-block__title">Sliders</h4>
         <div class="basic-block__body">
-          <slider-single min-value="300" max-value="400"></slider-single>
+          <slider-single
+            class="slider"
+            min-value="300"
+            max-value="400"
+          ></slider-single>
           <slider-double
+            class="slider"
             min-value="550"
             max-value="600"
             @change="sliderMove"
@@ -256,7 +261,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/scss/style";
+@import "src/scss/style";
 
 #app {
   position: relative;
@@ -266,7 +271,9 @@ export default {
   background: #f3f4f6;
   border-radius: 56px;
   padding: 50px 55px 105px 55px;
-  margin: 50px 0;
+  margin: 20px 0;
+  border: 1px solid $c-border;
+  box-shadow: 0px 0px 15px 0px rgba($c-border, 0.8);
 }
 
 .title {
@@ -280,12 +287,11 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin: 10px 0;
-    gap: 20px 10px;
+    gap: 20px 40px;
   }
 }
 
 .basic-block {
-  flex: 1 0 25%;
   &__title {
     font-size: rem(16);
     font-weight: 700;
@@ -310,5 +316,13 @@ export default {
   &__item-tooltip--warning {
     color: $c-warning;
   }
+}
+
+.radiocheck-content {
+  justify-content: space-between;
+}
+
+.slider {
+  width: 300px;
 }
 </style>

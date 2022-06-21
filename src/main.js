@@ -7,6 +7,8 @@ import {
   faTriangleExclamation,
   faCircle,
   faCheck,
+  faBriefcase,
+  faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import App from "./App.vue";
 
@@ -14,10 +16,11 @@ const app = createApp(App);
 
 library.add(
   faCircleExclamation,
-
+  faBriefcase,
   faTriangleExclamation,
   faCircle,
-  faCheck
+  faCheck,
+  faTrashCan
 );
 
 app.component("font-awesome-icon", FontAwesomeIcon);

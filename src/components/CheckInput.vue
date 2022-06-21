@@ -14,19 +14,15 @@
     </label>
     <div class="text-input__actions action-input">
       <button class="action-input__button" @click="trashClickHandle">
-        <i
-          class="
-            action-input__icon action-input__icon--warning
-            fa-solid fa-trash-can
-          "
-        ></i></button
+        <font-awesome-icon
+          class="action-input__icon action-input__icon--warning"
+          icon="fa-solid fa-trash-can"
+        /></button
       ><button class="action-input__button" @click="checkClickHandle">
-        <i
-          class="
-            action-input__icon action-input__icon--success
-            fa-solid fa-check
-          "
-        ></i>
+        <font-awesome-icon
+          class="action-input__icon action-input__icon--success"
+          icon="fa-solid fa-check"
+        />
       </button>
     </div>
   </div>

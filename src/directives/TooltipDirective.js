@@ -13,7 +13,6 @@ export const TooltipDirective = {
     document.body.appendChild(tooltip);
 
     if (binding.arg) {
-      console.log(binding.arg);
       tooltip.style = `--tooltip-color: ${binding.arg}`;
     }
 
