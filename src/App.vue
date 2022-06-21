@@ -271,15 +271,23 @@ export default {
   background: #f3f4f6;
   border-radius: 56px;
   padding: 50px 55px 105px 55px;
-  margin: 20px 0;
+  margin: 20px auto;
   border: 1px solid $c-border;
   box-shadow: 0px 0px 15px 0px rgba($c-border, 0.8);
+
+  @media (max-width: 575.98px) {
+    padding: 20px;
+  }
 }
 
 .title {
   font-size: rem(21);
   font-weight: 400;
   line-height: rem(30);
+
+  @media (max-width: 767.98px) {
+    text-align: center;
+  }
 }
 
 .basic {
@@ -288,6 +296,10 @@ export default {
     flex-wrap: wrap;
     margin: 10px 0;
     gap: 20px 40px;
+
+    @media (max-width: 575.98px) {
+      justify-content: center;
+    }
   }
 }
 
@@ -311,6 +323,10 @@ export default {
     color: $c-dark;
     font-size: rem(24);
     cursor: pointer;
+
+    @media (max-width: (575.98px - 0.02)) {
+      margin: 0 auto;
+    }
   }
 
   &__item-tooltip--warning {
@@ -320,9 +336,17 @@ export default {
 
 .radiocheck-content {
   justify-content: space-between;
+
+  @media (max-width: 575.98px) {
+    justify-content: center;
+  }
 }
 
 .slider {
   width: 300px;
+
+  @media (max-width: (575.98px - 0.02)) {
+    width: 200px;
+  }
 }
 </style>

@@ -21,7 +21,7 @@ import Field from "@/components/DatetimepickerField.vue";
 export default {
   mounted() {
     window.addEventListener("click", (e) => {
-      const target = e.target;
+      const { target } = e;
       if (!this.$el.contains(target) && this.isOpen === true) {
         this.isOpen = false;
       }
@@ -48,7 +48,6 @@ export default {
 <style lang="scss">
 .datetimepicker {
   position: relative;
-  width: 300px;
 }
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;

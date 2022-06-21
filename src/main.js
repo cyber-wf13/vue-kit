@@ -9,6 +9,10 @@ import {
   faCheck,
   faBriefcase,
   faTrashCan,
+  faChevronLeft,
+  faChevronRight,
+  faAnglesLeft,
+  faAnglesRight,
 } from "@fortawesome/free-solid-svg-icons";
 import App from "./App.vue";
 
@@ -20,7 +24,11 @@ library.add(
   faTriangleExclamation,
   faCircle,
   faCheck,
-  faTrashCan
+  faTrashCan,
+  faChevronLeft,
+  faChevronRight,
+  faAnglesLeft,
+  faAnglesRight
 );
 
 app.component("font-awesome-icon", FontAwesomeIcon);

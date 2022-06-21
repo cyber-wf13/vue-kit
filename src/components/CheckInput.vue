@@ -50,11 +50,15 @@ export default {
 <style lang="scss">
 .text-input {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  @media (max-width: 575.98px) {
+    justify-content: center;
+    flex-direction: column;
+  }
 
   &__input {
     height: 45px;
-    width: 300px;
     border: 1px solid $c-border;
     border-radius: 7px;
     padding: 10px 10px 10px 16px;
@@ -87,6 +91,9 @@ export default {
   }
 
   &__actions {
+    @media (max-width: 575.98px) {
+      margin: 5px 0 0;
+    }
     margin-left: 18px;
   }
 }

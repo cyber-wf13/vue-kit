@@ -86,10 +86,10 @@ export default {
         this.$emit("selectDate", resultDate);
       }
     },
-    dateSelect(newDate, oldDate) {
+    dateSelect(newDate) {
       let day = newDate.day.toString();
       let month = newDate.month.toString();
-      let year = newDate.year;
+      const { year } = newDate;
       // console.log("Update field", newDate, oldDate);
       if (day.length === 1) {
         day = `0${day}`;
@@ -113,7 +113,6 @@ export default {
   max-width: 300px;
 
   &__input {
-    width: 300px;
     height: 45px;
     background: #fff;
     border: 1px solid $c-border;
