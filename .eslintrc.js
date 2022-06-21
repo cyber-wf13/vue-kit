@@ -16,6 +16,7 @@ module.exports = {
     "comma-dangle": "off",
     "vuejs-accessibility/click-events-have-key-events": "off",
     "vuejs-accessibility/mouse-events-have-key-events": "off",
+    "vuejs-accessibility/label-has-for": "off",
     "operator-linebreak": "off",
   },
 };

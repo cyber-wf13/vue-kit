@@ -1,9 +1,6 @@
 .tooltip {
   --tooltip-color: #182233;
   position: absolute;
-  bottom: 170%;
-  right: 50%;
-  transform: translateX(50%);
   width: 250px;
   font-family: $base-font;
   font-weight: 500;
@@ -31,14 +28,8 @@
     border-width: 12px 12px 0 12px;
     border-color: var(--tooltip-color) transparent transparent transparent;
   }
-}
 
-[data-parent-tooltip] {
-  position: relative !important;
-}
-
-[data-parent-tooltip]:hover {
-  .tooltip {
+  &--visible {
     opacity: 1;
     visibility: visible;
     z-index: 9999;

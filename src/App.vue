@@ -134,22 +134,22 @@
       <div class="basic__block basic-block">
         <h4 class="basic-block__title">Default</h4>
         <div class="basic-block__body">
-          <i
-            class="basic-block__item-tooltip fa-solid fa-circle-exclamation"
+          <div
+            class="basic-block__item-tooltip"
             v-tooltip="'Tooltip content here'"
-          ></i>
+          >
+            <font-awesome-icon icon="fa-solid fa-circle-exclamation" />
+          </div>
         </div>
       </div>
       <div class="basic__block basic-block">
         <h4 class="basic-block__title">Warning</h4>
         <div class="basic-block__body">
-          <i
-            class="
-              basic-block__item-tooltip basic-block__item-tooltip--warning
-              fa-solid fa-triangle-exclamation
-            "
+          <font-awesome-icon
+            class="basic-block__item-tooltip basic-block__item-tooltip--warning"
+            icon="fa-solid fa-triangle-exclamation"
             v-tooltip:[color]="'Tooltip content here'"
-          ></i>
+          />
         </div>
       </div>
     </div>
