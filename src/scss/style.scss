@@ -1,11 +1,5 @@
 // Стандартная библиотека sass
 @use "sass:map";
-@use "sass:math";
-
-//Создание миксинов и переменных
-@import "helpers/functions";
-@import "helpers/mixins";
-@import "helpers/vars";
 
 // Объявление стилей для всего проекта
 @import "base/global";
@@ -14,3 +8,4 @@
 
 // Стили для компонентов
 @import "components/tooltip";
+@import "components/header";

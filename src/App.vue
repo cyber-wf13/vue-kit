@@ -1,7 +1,7 @@
 <template>
   <section class="basic">
     <h2 class="basic__title title">Inputs</h2>
-    <div class="basic__content">
+    <div class="basic__content radiocheck-content">
       <div class="basic__block basic-block">
         <h4 class="basic-block__title">Checkboxes</h4>
         <div class="basic-block__body">
@@ -64,8 +64,13 @@
       <div class="basic__block basic-block">
         <h4 class="basic-block__title">Sliders</h4>
         <div class="basic-block__body">
-          <slider-single min-value="300" max-value="400"></slider-single>
+          <slider-single
+            class="slider"
+            min-value="300"
+            max-value="400"
+          ></slider-single>
           <slider-double
+            class="slider"
             min-value="550"
             max-value="600"
             @change="sliderMove"
@@ -134,22 +139,22 @@
       <div class="basic__block basic-block">
         <h4 class="basic-block__title">Default</h4>
         <div class="basic-block__body">
-          <i
-            class="basic-block__item-tooltip fa-solid fa-circle-exclamation"
+          <div
+            class="basic-block__item-tooltip"
             v-tooltip="'Tooltip content here'"
-          ></i>
+          >
+            <font-awesome-icon icon="fa-solid fa-circle-exclamation" />
+          </div>
         </div>
       </div>
       <div class="basic__block basic-block">
         <h4 class="basic-block__title">Warning</h4>
         <div class="basic-block__body">
-          <i
-            class="
-              basic-block__item-tooltip basic-block__item-tooltip--warning
-              fa-solid fa-triangle-exclamation
-            "
+          <font-awesome-icon
+            class="basic-block__item-tooltip basic-block__item-tooltip--warning"
+            icon="fa-solid fa-triangle-exclamation"
             v-tooltip:[color]="'Tooltip content here'"
-          ></i>
+          />
         </div>
       </div>
     </div>
@@ -256,7 +261,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/scss/style";
+@import "src/scss/style";
 
 #app {
   position: relative;
@@ -266,13 +271,23 @@ export default {
   background: #f3f4f6;
   border-radius: 56px;
   padding: 50px 55px 105px 55px;
-  margin: 50px 0;
+  margin: 20px auto;
+  border: 1px solid $c-border;
+  box-shadow: 0px 0px 15px 0px rgba($c-border, 0.8);
+
+  @media (max-width: 575.98px) {
+    padding: 20px;
+  }
 }
 
 .title {
   font-size: rem(21);
   font-weight: 400;
   line-height: rem(30);
+
+  @media (max-width: 767.98px) {
+    text-align: center;
+  }
 }
 
 .basic {
@@ -280,12 +295,15 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin: 10px 0;
-    gap: 20px 10px;
+    gap: 20px 40px;
+
+    @media (max-width: 575.98px) {
+      justify-content: center;
+    }
   }
 }
 
 .basic-block {
-  flex: 1 0 25%;
   &__title {
     font-size: rem(16);
     font-weight: 700;
@@ -305,10 +323,30 @@ export default {
     color: $c-dark;
     font-size: rem(24);
     cursor: pointer;
+
+    @media (max-width: (575.98px - 0.02)) {
+      margin: 0 auto;
+    }
   }
 
   &__item-tooltip--warning {
     color: $c-warning;
+  }
+}
+
+.radiocheck-content {
+  justify-content: space-between;
+
+  @media (max-width: 575.98px) {
+    justify-content: center;
+  }
+}
+
+.slider {
+  width: 300px;
+
+  @media (max-width: (575.98px - 0.02)) {
+    width: 200px;
   }
 }
 </style>

@@ -1,0 +1,8 @@
+// Стандартная библиотека sass
+@use "sass:map";
+@use "sass:math";
+
+//Создание миксинов и переменных
+@import "functions";
+@import "mixins";
+@import "vars";

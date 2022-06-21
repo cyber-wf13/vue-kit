@@ -7,13 +7,13 @@
             class="calendar-actions__prev-year calendar-actions__button"
             @click="yearPrevUpdate"
           >
-            <i class="fa-solid fa-angles-left"></i>
+            <font-awesome-icon icon="fa-solid fa-angles-left" />
           </button>
           <button
             class="calendar-actions__prev-month calendar-actions__button"
             @click="monthPrevUpdate"
           >
-            <i class="fa-solid fa-chevron-left"></i>
+            <font-awesome-icon icon="fa-solid fa-chevron-left" />
           </button>
         </div>
         <div class="calendar-actions__dates">
@@ -37,13 +37,13 @@
             class="calendar-actions__next-month calendar-actions__button"
             @click="monthNextUpdate"
           >
-            <i class="fa-solid fa-chevron-right"></i>
+            <font-awesome-icon icon="fa-solid fa-chevron-right" />
           </button>
           <button
             class="calendar-actions__next-year calendar-actions__button"
             @click="yearNextUpdate"
           >
-            <i class="fa-solid fa-angles-right"></i>
+            <font-awesome-icon icon="fa-solid fa-angles-right" />
           </button>
         </div>
       </div>
@@ -199,20 +199,20 @@ export default {
 
       // Алгоритм заповнення попередніх елементів перед датою
       while (startIdx !== 0) {
-        let startDate = new Date(
+        const startDate = new Date(
           prevYear,
           prevMonth,
-          this.daysCount[prevMonth] - startIdx + 1 //Отримуємо із списку в залежності від місяця день та нормалізуємо його
+          this.daysCount[prevMonth] - startIdx + 1 // Отримуємо із списку в залежності від місяця день та нормалізуємо його
         );
         daysOfArray.push(startDate.getDate());
-        startIdx--;
+        startIdx -= 1;
       }
 
       // Масив з днями вибраного місяця
-      let currentDaysOfArray = [];
+      const currentDaysOfArray = [];
 
       // Алгоритм додавання в календар вибраної дати
-      for (let day = 1; day <= this.daysCount[this.selectedMonth]; day++) {
+      for (let day = 1; day <= this.daysCount[this.selectedMonth]; day += 1) {
         currentDaysOfArray.push(
           new Date(this.selectedYear, this.selectedMonth, day).getDate()
         );
@@ -248,9 +248,9 @@ export default {
       }
 
       while (endDay <= endIdx) {
-        let endDate = new Date(nextYear, nextMonth, endDay).getDate();
+        const endDate = new Date(nextYear, nextMonth, endDay).getDate();
         daysOfArray.push(endDate);
-        endDay++;
+        endDay += 1;
       }
 
       return daysOfArray;
@@ -275,9 +275,10 @@ export default {
       // console.log("Month is update");
     },
     monthDateUpdate() {
-      this.selectedDateParams = Object.assign({}, this.selectedDateParams, {
+      this.selectedDateParams = {
+        ...this.selectedDateParams,
         month: this.selectedMonth + 1,
-      });
+      };
       this.emitSelectDate();
     },
     yearPrevUpdate() {
@@ -299,9 +300,10 @@ export default {
       // console.log("Year is update");
     },
     yearDateUpdate() {
-      this.selectedDateParams = Object.assign({}, this.selectedDateParams, {
+      this.selectedDateParams = {
+        ...this.selectedDateParams,
         year: this.selectedYear,
-      });
+      };
       this.emitSelectDate();
     },
     selectMonth(month) {
@@ -316,9 +318,9 @@ export default {
     },
     clickToDayCeil(e) {
       const ceil = e.currentTarget;
-      let selectDay = ceil.textContent;
+      const selectDay = ceil.textContent;
       let selectMonth = this.selectedMonth + 1;
-      let selectYear = this.selectedYear;
+      const selectYear = this.selectedYear;
 
       if (ceil.classList.contains("calendar__ceil-prev")) {
         selectMonth -= 1;
@@ -346,7 +348,7 @@ export default {
     },
     selectListOfYear() {
       const rangeOfYear = [];
-      for (let year = 1922; year <= 2122; year++) {
+      for (let year = 1922; year <= 2122; year += 1) {
         rangeOfYear.push({
           text: year,
           value: year,
@@ -361,8 +363,8 @@ export default {
         this.fromCalendar = false;
         return;
       }
-      let year = this.dateSelect.year;
-      let month = this.dateSelect.month - 1;
+      const { year } = this.dateSelect;
+      const month = this.dateSelect.month - 1;
       console.log("Update");
       this.selectedYear = year;
       this.selectedMonth = month;
