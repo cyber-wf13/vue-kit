@@ -150,11 +150,17 @@
       <div class="basic__block basic-block">
         <h4 class="basic-block__title">Warning</h4>
         <div class="basic-block__body">
-          <font-awesome-icon
-            class="basic-block__item-tooltip basic-block__item-tooltip--warning"
-            icon="fa-solid fa-triangle-exclamation"
+          <div
+            class="basic-block__item-tooltip"
             v-tooltip:[color]="'Tooltip content here'"
-          />
+          >
+            <font-awesome-icon
+              class="
+                basic-block__item-tooltip basic-block__item-tooltip--warning
+              "
+              icon="fa-solid fa-triangle-exclamation"
+            />
+          </div>
         </div>
       </div>
     </div>
