@@ -36,7 +36,7 @@ export default {
   },
   mounted() {
     window.addEventListener("click", (e) => {
-      const target = e.target;
+      const { target } = e;
       if (!this.$el.contains(target) && this.isOpen === true) {
         this.isOpen = false;
       }
@@ -53,8 +53,6 @@ export default {
       const selectedValue = selectOption.value;
       const idxItem = this.checkedItems.indexOf(selectedValue);
 
-      // this.selectText = selectedText;
-      // this.isOpen = false;
       if (idxItem === -1) {
         this.checkedItems.push(selectedValue);
         selectOption.classList.add("list-multi__item--checked");

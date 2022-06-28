@@ -1,5 +1,5 @@
 <template>
-  <label class="radiocheck" :class="$attrs.class" :for="id">
+  <label class="radiocheck" :class="classOfToggle" :for="id">
     <input
       class="radiocheck__input _visually-hidden"
       :type="type"
@@ -9,14 +9,22 @@
       :disabled="$attrs.disabled"
     />
     <slot>{{ type }}</slot>
-    <span class="radiocheck__icon" :class="classOfType"
-      ><i :class="classOfIcon" v-if="$attrs.class != 'toggle'"></i
-    ></span>
+    <span class="radiocheck__icon" :class="classOfType">
+      <font-awesome-icon v-if="toggle == false" :icon="classOfIcon" />
+    </span>
   </label>
 </template>
 <script>
 export default {
-  props: ["value", "type", "name"],
+  props: {
+    value: {},
+    type: {},
+    name: {},
+    toggle: {
+      type: Boolean,
+      default: false,
+    },
+  },
   name: "RadioCheck",
   inheritAttrs: false,
   data() {
@@ -31,11 +39,17 @@ export default {
         "radiocheck__icon-box": this.type === "checkbox",
       };
     },
-    classOfIcon() {
+    classOfToggle() {
       return {
-        "fa-solid fa-circle": this.type === "radio",
-        "fa-solid fa-check": this.type === "checkbox",
+        radiocheck: this.toggle === false,
+        toggle: this.toggle === true,
       };
+    },
+    classOfIcon() {
+      if (this.type === "radio") {
+        return "fa-solid fa-circle";
+      }
+      return "fa-solid fa-check";
     },
   },
 };

@@ -12,7 +12,7 @@
             :value="checkbox.value"
             :type="checkbox.type"
             :name="checkbox.name"
-            >RadioCheck {{ checkbox.id }}
+            >Checkbox {{ checkbox.id }}
           </radio-check>
         </div>
       </div>
@@ -27,8 +27,7 @@
             :value="radio.value"
             :type="radio.type"
             :name="radio.name"
-            class="toggle"
-            >RadioCheck {{ radio.id }}
+            >Radio {{ radio.id }}
           </radio-check>
         </div>
       </div>
@@ -43,8 +42,8 @@
             :value="checkbox.value"
             :type="checkbox.type"
             :name="checkbox.name"
-            class="toggle"
-            >RadioCheck {{ checkbox.id }}
+            toggle
+            >Toggle {{ checkbox.id }}
           </radio-check>
         </div>
       </div>
@@ -150,11 +149,17 @@
       <div class="basic__block basic-block">
         <h4 class="basic-block__title">Warning</h4>
         <div class="basic-block__body">
-          <font-awesome-icon
-            class="basic-block__item-tooltip basic-block__item-tooltip--warning"
-            icon="fa-solid fa-triangle-exclamation"
+          <div
+            class="basic-block__item-tooltip"
             v-tooltip:[color]="'Tooltip content here'"
-          />
+          >
+            <font-awesome-icon
+              class="
+                basic-block__item-tooltip basic-block__item-tooltip--warning
+              "
+              icon="fa-solid fa-triangle-exclamation"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -173,6 +178,9 @@ import CustomSelectMulti from "@/components/CustomSelectMulti.vue";
 
 export default {
   name: "App",
+  mounted() {
+    document.title = "Vue-Kit";
+  },
   data() {
     return {
       color: "#bb0000",

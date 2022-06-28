@@ -8,7 +8,6 @@
   >
     <slider-toggle
       :slider-width="sliderParams.width"
-      :slider-x="sliderParams.x"
       :leave="isLeave"
       :toggle-x="rightX"
       position="left"
@@ -21,7 +20,6 @@
     <span class="slider-double__line"></span>
     <slider-toggle
       :slider-width="sliderParams.width"
-      :slider-x="sliderParams.x"
       :leave="isLeave"
       :toggle-x="leftX"
       position="right"
@@ -31,6 +29,7 @@
 </template>
 <script>
 import SliderToggle from "./SliderDoubleToggle.vue";
+
 export default {
   props: ["minValue", "maxValue"],
   data() {
@@ -38,7 +37,6 @@ export default {
       isLeave: false,
       sliderParams: {
         width: 0,
-        x: 0,
       },
       percent: {
         min: null,
@@ -60,7 +58,6 @@ export default {
   mounted() {
     this.sliderParams.width =
       this.$refs.sliderBlock.getBoundingClientRect().width;
-    this.sliderParams.x = this.$refs.sliderBlock.getBoundingClientRect().x;
     this.rightX = this.sliderParams.width;
   },
   methods: {
@@ -96,6 +93,15 @@ export default {
     diffMinMaxValue() {
       return this.maxValue - this.minValue;
     },
+    // sliderParams() {
+    //   return {
+    //     width: document.querySelector(".slider-double").getBoundingClientRect()
+    //       .width,
+    //     x:
+    //       document.querySelector(".slider-double").getBoundingClientRect()
+    //         .left + window.scrollX,
+    //   };
+    // },
   },
 };
 </script>

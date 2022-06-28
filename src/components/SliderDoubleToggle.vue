@@ -11,7 +11,7 @@
 </template>
 <script>
 export default {
-  props: ["sliderWidth", "sliderX", "leave", "position", "toggleX"],
+  props: ["sliderWidth", "leave", "position", "toggleX"],
   data() {
     return {
       isPressed: false,
@@ -76,6 +76,13 @@ export default {
         "slider-toggle--left": this.position === "left",
         "slider-toggle--right": this.position === "right",
       };
+    },
+
+    sliderX() {
+      return (
+        this.$refs.toggle.closest(".slider-double").getBoundingClientRect()
+          .left + window.scrollX
+      );
     },
   },
 };
