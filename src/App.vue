@@ -1,12 +1,38 @@
 <template>
   <section class="basic">
+    <h2 class="basic__title title">Selected item:</h2>
+    <div class="basic__block basic-block">
+      <div class="basic-block__body">
+        <div class="display">
+          <span class="display__text"
+            >Selected is:
+            <b class="display__value">{{ selectedElement }}</b></span
+          >
+          <span class="display__text"
+            >Value is: <b class="display__value">{{ selectedValue }}</b></span
+          >
+          <button
+            class="display__button-reset"
+            @click="
+              selectedElement = 'none selected';
+              selectedValue = 'none selected';
+            "
+          >
+            Clear
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="basic">
     <h2 class="basic__title title">Inputs</h2>
     <div class="basic__content radiocheck-content">
       <div class="basic__block basic-block">
         <h4 class="basic-block__title">Checkboxes</h4>
         <div class="basic-block__body">
           <radio-check
-            @change="radioCheckHandle"
+            @change="changeInputsHandle"
             v-for="checkbox in checkboxes"
             :key="checkbox.id"
             :value="checkbox.value"
@@ -21,7 +47,7 @@
         <h4 class="basic-block__title">Radios</h4>
         <div class="basic-block__body">
           <radio-check
-            @change="radioCheckHandle"
+            @change="changeInputsHandle"
             v-for="radio in radios"
             :key="radio.id"
             :value="radio.value"
@@ -36,7 +62,7 @@
         <h4 class="basic-block__title">Toggle Buttons</h4>
         <div class="basic-block__body">
           <radio-check
-            @change="radioCheckHandle"
+            @change="changeInputsHandle"
             v-for="checkbox in checkboxes"
             :key="checkbox.id"
             :value="checkbox.value"
@@ -67,12 +93,15 @@
             class="slider"
             min-value="300"
             max-value="400"
+            name="slider-single"
+            @move="changeInputsHandle"
           ></slider-single>
           <slider-double
             class="slider"
             min-value="550"
             max-value="600"
-            @change="sliderMove"
+            name="slider-double"
+            @move="sliderMove"
           ></slider-double>
         </div>
       </div>
@@ -114,6 +143,8 @@
             :list-items="selectList"
             selected="Default title"
             :focus-value="1"
+            name="select"
+            @select="changeInputsHandle"
           />
         </div>
       </div>
@@ -125,7 +156,8 @@
             :list-items="selectList"
             selected="Default title"
             :focus-value="1"
-            @select="handleSelect"
+            @select="changeInputsHandle"
+            name="select-multi"
           />
         </div>
       </div>
@@ -184,6 +216,8 @@ export default {
   data() {
     return {
       color: "#bb0000",
+      selectedElement: "none selected",
+      selectedValue: "none selected",
       checkboxes: [
         {
           id: 0,
@@ -215,7 +249,7 @@ export default {
           id: 1,
           type: "radio",
           name: "RadioCheckName",
-          value: "Radio-1",
+          value: "Radio-2",
         },
         {
           id: 2,
@@ -255,14 +289,17 @@ export default {
     CustomSelectMulti,
   },
   methods: {
-    radioCheckHandle(e) {
-      console.log("From component", e.target.value);
+    changeInputsHandle({ item, value }) {
+      this.selectedElement = item;
+      this.selectedValue = value;
     },
-    sliderMove(value) {
-      console.log("Value is from PARENT", value);
+    sliderMove({ item, value }) {
+      this.selectedElement = item;
+      this.selectedValue = `Min: ${value.min} <==> Max: ${value.max}`;
     },
-    handleSelect(selected) {
-      console.log("Selected items", selected);
+    handleSelect({ item, value }) {
+      this.selectedElement = item;
+      this.selectedValue = value;
     },
   },
 };
@@ -355,6 +392,46 @@ export default {
 
   @media (max-width: (575.98px - 0.02)) {
     width: 200px;
+  }
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+  font-size: rem(19);
+  width: 100%;
+
+  @media (max-width: (map.get($breakpoints, "sm") - 0.02)) {
+    align-items: center;
+  }
+
+  &__text {
+    margin: 5px 0;
+  }
+
+  &__value {
+    text-decoration: underline;
+    color: $c-primary;
+    font-size: rem(18);
+  }
+
+  &__button-reset {
+    border: none;
+    background: rgba($c-primary, 0.4);
+    border-radius: 7px;
+    max-width: 100px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s color ease-in;
+    font-size: rem(17);
+    padding: 5px;
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: $c-white;
+      }
+    }
   }
 }
 </style>

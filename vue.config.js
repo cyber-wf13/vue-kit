@@ -6,7 +6,7 @@ module.exports = defineConfig({
   css: {
     loaderOptions: {
       scss: {
-        additionalData: `@import "~@/scss/helpers/_helpers.scss";`,
+        additionalData: `@use "sass:map"; @use "sass:math"; @import "~@/scss/helpers/_helpers.scss";`,
       },
     },
   },

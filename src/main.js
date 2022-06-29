@@ -11,6 +11,7 @@ import {
   faTrashCan,
   faChevronLeft,
   faChevronRight,
+  faChevronDown,
   faAnglesLeft,
   faAnglesRight,
 } from "@fortawesome/free-solid-svg-icons";
@@ -27,6 +28,7 @@ library.add(
   faTrashCan,
   faChevronLeft,
   faChevronRight,
+  faChevronDown,
   faAnglesLeft,
   faAnglesRight
 );

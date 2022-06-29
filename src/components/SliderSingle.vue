@@ -18,7 +18,7 @@
 </template>
 <script>
 export default {
-  props: ["minValue", "maxValue"],
+  props: ["minValue", "maxValue", "name"],
   data() {
     return {
       isPressed: false,
@@ -39,7 +39,7 @@ export default {
       this.isPressed = false;
       document.removeEventListener("mousemove", this.mouseMove);
       this.calculateValue();
-      this.$emit("change", this.currentValue);
+      this.$emit("move", { item: this.name, value: this.currentValue });
     },
     mouseMove(e) {
       const moveX = e.x;
@@ -54,7 +54,7 @@ export default {
 
       this.mouseMove(e);
       this.calculateValue();
-      this.$emit("change", this.currentValue);
+      this.$emit("move", { item: this.name, value: this.currentValue });
     },
     calculateTogglePos(moveX) {
       const sliderX = this.$refs.sliderBlock.getBoundingClientRect().x;

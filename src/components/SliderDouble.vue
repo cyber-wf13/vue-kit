@@ -31,7 +31,7 @@
 import SliderToggle from "./SliderDoubleToggle.vue";
 
 export default {
-  props: ["minValue", "maxValue"],
+  props: ["minValue", "maxValue", "name"],
   data() {
     return {
       isLeave: false,
@@ -78,7 +78,7 @@ export default {
         "style",
         `left: ${this.underlineCoords.left}px; right: ${this.underlineCoords.right}px;`
       );
-      this.$emit("change", this.rangeValue);
+      this.$emit("move", { item: this.name, value: this.rangeValue });
     },
     calculatePercent(value) {
       return Math.round((value / this.sliderParams.width) * 100);

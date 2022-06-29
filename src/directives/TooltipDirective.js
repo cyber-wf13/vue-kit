@@ -25,7 +25,6 @@ export const TooltipDirective = {
       tooltipCoords.x = tooltipCoords.x + parentWidth / 2 - width / 2;
       tooltip.style.top = `${tooltipCoords.y}px`;
       tooltip.style.left = `${tooltipCoords.x}px`;
-      tooltip.classList.add("tooltip--visible");
 
       el.addEventListener("mouseenter", () => {
         tooltip.classList.add("tooltip--visible");
