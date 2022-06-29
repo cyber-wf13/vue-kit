@@ -39,7 +39,6 @@ export default {
   },
   methods: {
     handleSelectDate(date) {
-      console.log("Date selected", date);
       this.selectedDate = date;
     },
   },
