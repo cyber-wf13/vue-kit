@@ -5,10 +5,13 @@
         class="custom-select__head-text"
         :class="{ 'custom-select__head-text--selected': isSelected }"
         >{{ selectText }}</span
-      ><i
-        class="custom-select__head-arrow fa-solid fa-chevron-down"
+      >
+      <div
+        class="custom-select__head-arrow"
         :class="{ 'custom-select__head-arrow--active': isOpen }"
-      ></i>
+      >
+        <font-awesome-icon icon="fa-solid fa-chevron-down" />
+      </div>
     </div>
     <ul
       class="custom-select__list"
@@ -29,7 +32,7 @@
 </template>
 <script>
 export default {
-  props: ["listItems", "selected", "focusValue"],
+  props: ["listItems", "selected", "focusValue", "name"],
   data() {
     return {
       isOpen: false,
@@ -39,7 +42,7 @@ export default {
   },
   mounted() {
     window.addEventListener("click", (e) => {
-      const target = e.target;
+      const { target } = e;
       if (!this.$el.contains(target) && this.isOpen === true) {
         this.isOpen = false;
       }
@@ -59,7 +62,7 @@ export default {
       this.selectText = selectedText;
       this.isOpen = false;
       this.isSelected = true;
-      this.$emit("select", selectedValue);
+      this.$emit("select", { item: this.name, value: selectedValue });
     },
     setFocusToItem() {
       if (this.itemForFocus) {

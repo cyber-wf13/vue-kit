@@ -1,11 +1,13 @@
 <template>
   <div class="custom-select">
     <div class="custom-select__head" @click="toggleList" tabindex="-1">
-      <span class="custom-select__head-text">{{ selectText }}</span
-      ><i
-        class="custom-select__head-arrow fa-solid fa-chevron-down"
+      <span class="custom-select__head-text">{{ selectText }}</span>
+      <div
+        class="custom-select__head-arrow"
         :class="{ 'custom-select__head-arrow--active': isOpen }"
-      ></i>
+      >
+        <font-awesome-icon icon="fa-solid fa-chevron-down" />
+      </div>
     </div>
     <ul
       class="custom-select__list list-multi"
@@ -26,7 +28,7 @@
 </template>
 <script>
 export default {
-  props: ["listItems", "selected", "focusValue"],
+  props: ["listItems", "selected", "focusValue", "name"],
   data() {
     return {
       isOpen: false,
@@ -82,7 +84,7 @@ export default {
     },
     isOpen(open) {
       if (open === false) {
-        this.$emit("select", this.checkedItems);
+        this.$emit("select", { item: this.name, value: this.checkedItems });
       }
     },
   },

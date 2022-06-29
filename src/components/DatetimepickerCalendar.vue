@@ -306,13 +306,13 @@ export default {
       };
       this.emitSelectDate();
     },
-    selectMonth(month) {
-      this.selectedMonth = month;
+    selectMonth({ value }) {
+      this.selectedMonth = value;
       this.days = this.calculateDays();
       this.monthDateUpdate();
     },
-    selectYear(year) {
-      this.selectedYear = year;
+    selectYear({ value }) {
+      this.selectedYear = value;
       this.days = this.calculateDays();
       this.yearDateUpdate();
     },
@@ -365,7 +365,6 @@ export default {
       }
       const { year } = this.dateSelect;
       const month = this.dateSelect.month - 1;
-      console.log("Update");
       this.selectedYear = year;
       this.selectedMonth = month;
       this.days = this.calculateDays();
@@ -463,6 +462,11 @@ export default {
   justify-content: space-between;
   align-items: center;
   color: #fff;
+
+  &__items {
+    display: flex;
+    align-items: center;
+  }
 
   &__button {
     background-color: transparent;

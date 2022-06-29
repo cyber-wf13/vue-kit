@@ -7,6 +7,7 @@
       :id="id"
       :value="value"
       :disabled="$attrs.disabled"
+      @change="changeInputHandle"
     />
     <slot>{{ type }}</slot>
     <span class="radiocheck__icon" :class="classOfType">
@@ -31,6 +32,14 @@ export default {
     return {
       id: Math.random().toString(36).substr(2, 10),
     };
+  },
+  methods: {
+    changeInputHandle(e) {
+      const inputValue = e.currentTarget.value;
+      const inputName = this.name;
+
+      this.$emit("change", { value: inputValue, item: inputName });
+    },
   },
   computed: {
     classOfType() {
