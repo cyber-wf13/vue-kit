@@ -10,8 +10,8 @@ export const TooltipDirective = {
       document.body.appendChild(tooltip);
 
       const tooltipCoords = {
-        x: el.getBoundingClientRect().x,
-        y: el.getBoundingClientRect().top + window.scrollY,
+        x: 0,
+        y: 0,
       };
 
       if (binding.arg) {
@@ -21,12 +21,14 @@ export const TooltipDirective = {
       const { height, width } = tooltip.getBoundingClientRect();
       const parentWidth = el.getBoundingClientRect().width;
 
-      tooltipCoords.y = tooltipCoords.y - height - indentBottom;
-      tooltipCoords.x = tooltipCoords.x + parentWidth / 2 - width / 2;
-      tooltip.style.top = `${tooltipCoords.y}px`;
-      tooltip.style.left = `${tooltipCoords.x}px`;
-
-      el.addEventListener("mouseenter", () => {
+      el.addEventListener("mouseenter", (e) => {
+        const target = e.currentTarget;
+        const elemY = target.getBoundingClientRect().top + window.scrollY;
+        const elemX = target.getBoundingClientRect().x;
+        tooltipCoords.y = elemY - height - indentBottom;
+        tooltipCoords.x = elemX + parentWidth / 2 - width / 2;
+        tooltip.style.top = `${tooltipCoords.y}px`;
+        tooltip.style.left = `${tooltipCoords.x}px`;
         tooltip.classList.add("tooltip--visible");
       });
 
