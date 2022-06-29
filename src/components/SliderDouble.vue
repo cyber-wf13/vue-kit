@@ -1,6 +1,7 @@
 <template>
   <div
     class="slider-double"
+    :style="{ width: `${sliderWidth}px` }"
     ref="sliderBlock"
     @mouseleave="isLeave = true"
     @mouseenter="isLeave = false"
@@ -31,12 +32,12 @@
 import SliderToggle from "./SliderDoubleToggle.vue";
 
 export default {
-  props: ["minValue", "maxValue", "name"],
+  props: ["minValue", "maxValue", "name", "sliderWidth"],
   data() {
     return {
       isLeave: false,
       sliderParams: {
-        width: 0,
+        width: this.sliderWidth,
       },
       percent: {
         min: null,
@@ -51,14 +52,12 @@ export default {
         right: 0,
       },
       leftX: 0,
-      rightX: 0,
+      rightX: this.sliderWidth,
     };
   },
   components: { SliderToggle },
   mounted() {
-    this.sliderParams.width =
-      this.$refs.sliderBlock.getBoundingClientRect().width;
-    this.rightX = this.sliderParams.width;
+    // this.rightX = this.sliderParams.width;
   },
   methods: {
     toggleMove(toggleParams) {
@@ -94,12 +93,10 @@ export default {
       return this.maxValue - this.minValue;
     },
     // sliderParams() {
+    //   console.log(this.$el);
     //   return {
-    //     width: document.querySelector(".slider-double").getBoundingClientRect()
+    //     width: this.$el.querySelector(".slider-double").getBoundingClientRect()
     //       .width,
-    //     x:
-    //       document.querySelector(".slider-double").getBoundingClientRect()
-    //         .left + window.scrollX,
     //   };
     // },
   },
@@ -111,7 +108,10 @@ export default {
   background-color: transparent;
   height: 15px;
   z-index: 1;
-  width: 100%;
+
+  @media (max-width: (575.98px - 0.02)) {
+    width: 200px;
+  }
 
   &__line {
     display: inline-block;
@@ -127,6 +127,7 @@ export default {
   }
 
   &__underline {
+    display: block;
     z-index: 3;
     background-color: $c-primary;
   }

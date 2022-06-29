@@ -90,17 +90,17 @@
         <h4 class="basic-block__title">Sliders</h4>
         <div class="basic-block__body">
           <slider-single
-            class="slider"
             min-value="300"
             max-value="400"
             name="slider-single"
+            slider-width="300"
             @move="changeInputsHandle"
           ></slider-single>
           <slider-double
-            class="slider"
             min-value="550"
             max-value="600"
             name="slider-double"
+            slider-width="300"
             @move="sliderMove"
           ></slider-double>
         </div>
@@ -384,14 +384,6 @@ export default {
 
   @media (max-width: 575.98px) {
     justify-content: center;
-  }
-}
-
-.slider {
-  width: 300px;
-
-  @media (max-width: (575.98px - 0.02)) {
-    width: 200px;
   }
 }
 

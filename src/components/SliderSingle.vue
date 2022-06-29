@@ -2,6 +2,7 @@
   <div
     class="slider"
     ref="sliderBlock"
+    :style="{ width: `${sliderWidth}px` }"
     @mouseleave="toggleUp"
     @click="lineClick"
   >
@@ -18,7 +19,7 @@
 </template>
 <script>
 export default {
-  props: ["minValue", "maxValue", "name"],
+  props: ["minValue", "maxValue", "name", "sliderWidth"],
   data() {
     return {
       isPressed: false,
@@ -94,7 +95,10 @@ export default {
   display: flex;
   align-items: center;
   z-index: 1;
-  width: 100%;
+
+  @media (max-width: (575.98px - 0.02)) {
+    width: 200px;
+  }
 
   &__line {
     display: inline-block;
