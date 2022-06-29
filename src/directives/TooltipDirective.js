@@ -1,6 +1,7 @@
 export const TooltipDirective = {
   mounted(el, binding) {
-    document.addEventListener("DOMContentLoaded", () => {
+    window.addEventListener("load", setDirective);
+    function setDirective() {
       const tooltip = document.createElement("div");
       const indentBottom = 20;
 
@@ -24,7 +25,7 @@ export const TooltipDirective = {
       tooltipCoords.x = tooltipCoords.x + parentWidth / 2 - width / 2;
       tooltip.style.top = `${tooltipCoords.y}px`;
       tooltip.style.left = `${tooltipCoords.x}px`;
-      // tooltip.classList.add("tooltip--visible");
+      tooltip.classList.add("tooltip--visible");
 
       el.addEventListener("mouseenter", () => {
         tooltip.classList.add("tooltip--visible");
@@ -33,7 +34,7 @@ export const TooltipDirective = {
       el.addEventListener("mouseleave", () => {
         tooltip.classList.remove("tooltip--visible");
       });
-    });
+    }
   },
 };
 

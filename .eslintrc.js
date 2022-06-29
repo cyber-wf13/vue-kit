@@ -18,5 +18,6 @@ module.exports = {
     "vuejs-accessibility/mouse-events-have-key-events": "off",
     "vuejs-accessibility/label-has-for": "off",
     "operator-linebreak": "off",
+    "no-use-before-define": "off",
   },
 };
