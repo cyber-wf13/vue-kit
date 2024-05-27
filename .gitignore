@@ -33,4 +33,4 @@ node_modules
 # vue.config.js
 
 #Ignore files for develop branch
-README.md
+# README.md
